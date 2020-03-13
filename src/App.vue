@@ -1,28 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <VirtualScrollList :size=40 :remain=8 :items="items">
+      <Item slot-scope="{item}" :item="item"></Item>
+    </VirtualScrollList>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import VirtualScrollList from './components/virtual-scroll-list'
+import Item from './components/item'
+let items = []
+let total = 100000
+for(let i=0;i<total;i++){
+  items.push({id:i,value:i})
+}
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    VirtualScrollList,
+    Item
+  },
+  data(){
+    return{
+      items
+    }
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+*{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;//边框也会算进高度
 }
 </style>
